@@ -67,36 +67,26 @@ const images = [
         description: 'Lighthouse Coast Sea',
     },
 ];
+const container = document.querySelector('.gallery');
 
-// const gallery = document.getElementById('gallery');
+function productTemplate(image) {
+    return `<li class="gallery-item">
+	<a class="gallery-link" href="${image.original}">
+		<img 
+			class="gallery-image" 
+			src="${image.preview}" 
+			alt="${image.description}" 
+			/>
+	</a>
+</li>
+`
+}
 
-// function productTemplate(image) {
-//   return `<li class="gallery-item">
-//             <a class="gallery-link" href="${image.original}">
-//                 <img class="gallery-image" src="${image.preview}" alt="${image.description}"/>
-//             </a>
-//         </li>`;
-//   }
-// function productsTemplate(arr) {
-//     return arr.map(productTemplate).join('');
-// }
-// const markup = productsTemplate(images);
-// gallery.innerHTML = markup;
+function productsTemplate(arr) {
+    return arr.map(productTemplate).join('');
+}
 
-// new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250});
+const markup = productsTemplate(images);
+container.innerHTML = markup;
+const instance = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
 
-const galleryContainer = document.querySelector('.gallery');
-const galleryMarkup = galleryItems.map(({ preview, original, description }) => `
-  <li class="gallery-item">
-    <a class="gallery-link" href="${original}">
-      <img class="gallery-image" src="${preview}" alt="${description}" />
-    </a>
-  </li>
-`).join('');
-
-galleryContainer.innerHTML = galleryMarkup;
-
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
